@@ -32,20 +32,32 @@ import hudson.model.TransientUserActionFactory;
 import hudson.model.User;
 import hudson.model.UserProperty;
 import hudson.model.UserPropertyDescriptor;
+<<<<<<< Updated upstream
 import jakarta.servlet.ServletException;
+=======
+>>>>>>> Stashed changes
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
+<<<<<<< Updated upstream
+=======
+import javax.servlet.ServletException;
+>>>>>>> Stashed changes
 import jenkins.model.Jenkins;
 import jenkins.security.UserDetailsCache;
 import net.sf.json.JSONObject;
 import org.jenkinsci.Symbol;
 import org.kohsuke.accmod.Restricted;
 import org.kohsuke.accmod.restrictions.NoExternalUse;
+<<<<<<< Updated upstream
 import org.kohsuke.stapler.StaplerRequest2;
 import org.kohsuke.stapler.StaplerResponse2;
+=======
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+>>>>>>> Stashed changes
 import org.kohsuke.stapler.verb.POST;
 
 @Restricted(NoExternalUse.class)
@@ -91,7 +103,11 @@ public class UserPropertyCategoryAccountAction extends UserPropertyCategoryActio
     }
 
     @POST
+<<<<<<< Updated upstream
     public void doConfigSubmit(StaplerRequest2 req, StaplerResponse2 rsp) throws IOException, ServletException, Descriptor.FormException {
+=======
+    public void doConfigSubmit(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException, Descriptor.FormException {
+>>>>>>> Stashed changes
         User targetUser = this.getTargetUser();
         targetUser.checkPermission(Jenkins.ADMINISTER);
 

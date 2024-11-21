@@ -27,11 +27,11 @@ package hudson;
 import static java.lang.annotation.ElementType.FIELD;
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import static jenkins.YesNoMaybe.MAYBE;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import jenkins.YesNoMaybe;
 import net.java.sezpoz.Indexable;
@@ -69,7 +69,7 @@ import net.java.sezpoz.Indexable;
  * @see ExtensionList
  */
 @Indexable
-@Retention(RUNTIME)
+@Retention(RetentionPolicy.SOURCE)
 @Target({TYPE, FIELD, METHOD})
 @Documented
 public @interface Extension {

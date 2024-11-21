@@ -96,9 +96,19 @@ THE SOFTWARE.
     <antlr.version>4.13.2</antlr.version>
     <bridge-method-injector.version>1.30</bridge-method-injector.version>
     <spotless.check.skip>false</spotless.check.skip>
+<<<<<<< Updated upstream
     <!-- Make sure to keep the jetty-ee9-maven-plugin version in war/pom.xml in sync with the Jetty release in Winstone: -->
     <winstone.version>8.2</winstone.version>
     <node.version>20.18.0</node.version>
+=======
+    <!-- Make sure to keep the jetty-maven-plugin version in war/pom.xml in sync with the Jetty release in Winstone: -->
+    <winstone.version>6.18</winstone.version>
+
+    <!--Override setting in 'grandparent' POM, because Java compiler mocks about version 11 -->
+    <maven.compiler.release>17</maven.compiler.release>
+    <maven.compiler.testRelease>${maven.compiler.release}</maven.compiler.testRelease>
+
+>>>>>>> Stashed changes
   </properties>
 
   <!--
@@ -140,6 +150,10 @@ THE SOFTWARE.
           <artifactId>maven-compiler-plugin</artifactId>
           <!-- Version specified in parent POM -->
           <configuration>
+<<<<<<< Updated upstream
+=======
+            <fork>false</fork>
+>>>>>>> Stashed changes
             <compilerReuseStrategy>alwaysNew</compilerReuseStrategy>
             <compilerArgs>
               <!--

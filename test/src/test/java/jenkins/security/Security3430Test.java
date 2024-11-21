@@ -40,7 +40,10 @@ import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 import org.junit.Test;
+<<<<<<< Updated upstream
 import org.junit.rules.TemporaryFolder;
+=======
+>>>>>>> Stashed changes
 import org.jvnet.hudson.test.InboundAgentRule;
 import org.jvnet.hudson.test.JenkinsRule;
 import org.jvnet.hudson.test.RealJenkinsRule;
@@ -54,9 +57,12 @@ public class Security3430Test {
     @Rule
     public InboundAgentRule agents = new InboundAgentRule();
 
+<<<<<<< Updated upstream
     @Rule
     public TemporaryFolder tmp = new TemporaryFolder();
 
+=======
+>>>>>>> Stashed changes
     @Test
     public void runWithOldestSupportedAgentJar() throws Throwable {
         runWithRemoting(RemotingVersionInfo.getMinimumSupportedVersion().toString(), "/old-remoting/remoting-minimum-supported.jar", true);
@@ -69,6 +75,7 @@ public class Security3430Test {
 
     @Test
     public void runWithCurrentAgentJar() throws Throwable {
+<<<<<<< Updated upstream
         runWithRemoting(Launcher.VERSION, null, false);
     }
 
@@ -77,6 +84,20 @@ public class Security3430Test {
         final String agentName = "agent1";
         try {
             createAgent(agentName, remotingResourcePath);
+=======
+        runWithRemoting(null, null, false);
+    }
+
+    private void runWithRemoting(String expectedRemotingVersion, String remotingResourcePath, boolean requestingJarFromAgent) throws Throwable {
+        if (expectedRemotingVersion != null) {
+            FileUtils.copyURLToFile(Security3430Test.class.getResource(remotingResourcePath), new File(jj.getHome(), "agent.jar"));
+        }
+
+        jj.startJenkins();
+        final String agentName = "agent1";
+        try {
+            agents.createAgent(jj, InboundAgentRule.Options.newBuilder().name(agentName).build());
+>>>>>>> Stashed changes
             jj.runRemotely(Security3430Test::_run, agentName, expectedRemotingVersion, requestingJarFromAgent, true);
         } finally {
             agents.stop(jj, agentName);
@@ -84,13 +105,18 @@ public class Security3430Test {
         jj.runRemotely(Security3430Test::disableJarURLValidatorImpl);
         final String agentName2 = "agent2";
         try {
+<<<<<<< Updated upstream
             createAgent(agentName2, remotingResourcePath);
+=======
+            agents.createAgent(jj, InboundAgentRule.Options.newBuilder().name(agentName2).build());
+>>>>>>> Stashed changes
             jj.runRemotely(Security3430Test::_run, agentName2, expectedRemotingVersion, requestingJarFromAgent, false);
         } finally {
             agents.stop(jj, agentName2);
         }
     }
 
+<<<<<<< Updated upstream
     private void createAgent(String name, String remotingResourcePath) throws Throwable {
         if (remotingResourcePath != null) {
             var jar = tmp.newFile(name + ".jar");
@@ -109,6 +135,8 @@ public class Security3430Test {
         return ((SlaveComputer) r.jenkins.getComputer(name)).getJnlpMac();
     }
 
+=======
+>>>>>>> Stashed changes
     // This is quite artificial, but demonstrating that without JarURLValidatorImpl we do not allow any calls from the agent:
     private static void disableJarURLValidatorImpl(JenkinsRule j) {
         assertTrue(ExtensionList.lookup(ChannelConfigurator.class).remove(ExtensionList.lookupSingleton(JarURLValidatorImpl.class)));
@@ -129,7 +157,10 @@ public class Security3430Test {
         final Computer computer = j.jenkins.getComputer(agentName);
         assertThat(computer, instanceOf(SlaveComputer.class));
         SlaveComputer agent = (SlaveComputer) computer;
+<<<<<<< Updated upstream
         j.waitOnline(agent.getNode());
+=======
+>>>>>>> Stashed changes
         final Channel channel = agent.getChannel();
         if (expectedRemotingVersion != null) {
             final String result = channel.call(new AgentVersionCallable());
@@ -145,7 +176,11 @@ public class Security3430Test {
                 if (requestingJarFromAgent) {
                     assertThat(logRecords, hasItem(logMessageContainsString("Allowing URL: file:/")));
                 } else {
+<<<<<<< Updated upstream
                     assertThat(logRecords.stream().map(LogRecord::getMessage).toList(), is(empty()));
+=======
+                    assertThat(logRecords, is(empty()));
+>>>>>>> Stashed changes
                 }
 
                 logHandler.clear();
@@ -159,7 +194,11 @@ public class Security3430Test {
                     assertThat(ex.getMessage(), containsString("No hudson.remoting.JarURLValidator has been set for this channel, so all #fetchJar calls are rejected. This is likely a bug in Jenkins. As a workaround, try updating the agent.jar file."));
                 } else {
                     assertTrue(channel.preloadJar(j.jenkins.getPluginManager().uberClassLoader, Stapler.class));
+<<<<<<< Updated upstream
                     assertThat(logRecords.stream().map(LogRecord::getMessage).toList(), is(empty()));
+=======
+                    assertThat(logRecords, is(empty()));
+>>>>>>> Stashed changes
                 }
             }
         }

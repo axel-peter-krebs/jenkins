@@ -6,6 +6,7 @@ import hudson.model.User;
 import hudson.model.UserProperty;
 import hudson.model.UserPropertyDescriptor;
 import hudson.util.FormApply;
+<<<<<<< Updated upstream
 import jakarta.servlet.ServletException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -14,6 +15,16 @@ import jenkins.model.Jenkins;
 import net.sf.json.JSONObject;
 import org.kohsuke.stapler.StaplerRequest2;
 import org.kohsuke.stapler.StaplerResponse2;
+=======
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.servlet.ServletException;
+import jenkins.model.Jenkins;
+import net.sf.json.JSONObject;
+import org.kohsuke.stapler.StaplerRequest;
+import org.kohsuke.stapler.StaplerResponse;
+>>>>>>> Stashed changes
 import org.kohsuke.stapler.verb.POST;
 
 public abstract class UserPropertyCategoryAction {
@@ -31,7 +42,11 @@ public abstract class UserPropertyCategoryAction {
     public @NonNull abstract List<UserPropertyDescriptor> getMyCategoryDescriptors();
 
     @POST
+<<<<<<< Updated upstream
     public void doConfigSubmit(StaplerRequest2 req, StaplerResponse2 rsp) throws IOException, ServletException, Descriptor.FormException {
+=======
+    public void doConfigSubmit(StaplerRequest req, StaplerResponse rsp) throws IOException, ServletException, Descriptor.FormException {
+>>>>>>> Stashed changes
         this.targetUser.checkPermission(Jenkins.ADMINISTER);
 
         JSONObject json = req.getSubmittedForm();
